@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.regex.Matcher;
+
 /**
  * @author Damian L. Lisas on 2019-08-02
  */
@@ -29,7 +31,13 @@ public class ClientRequest {
 
     @JsonIgnore
     public boolean isValid() {
-        return !this.email.isEmpty() &&
-                this.email != null;
+        if(this.email != null) {
+            Matcher matcher = ClientConstants.VALID_EMAIL_ADDRESS_REGEX.matcher(this.email);
+
+            return matcher.find();
+        }
+        else {
+            return false;
+        }
     }
 }

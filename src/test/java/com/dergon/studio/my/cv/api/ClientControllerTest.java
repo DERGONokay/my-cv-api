@@ -8,10 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -51,9 +48,23 @@ public class ClientControllerTest {
         ClientResponse responseBody = response.getBody();
 
         assertThat(responseBody.getClient()).isNotNull();
-        assertThat(responseBody.getClient()).isNotEqualTo("");
+        assertThat(responseBody.getClient()).isNotEqualTo(null);
         assertThat(responseBody.isCreated()).isTrue();
         assertThat(responseBody.getError()).isNullOrEmpty();
+    }
+
+    @Test
+    public void should_return_bad_request() {
+        HttpEntity<ClientRequest> request = new HttpEntity<>(new ClientRequest("@gmail.com"), headers);
+
+        ResponseEntity<ClientResponse> response = restTemplate.postForEntity(createURLWithPort("/api/v1/clients/create"), request, ClientResponse.class, new HashMap<>());
+
+        ClientResponse responseBody = response.getBody();
+
+        assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseBody.getClient()).isNull();
+        assertThat(responseBody.isCreated()).isFalse();
+        assertThat(responseBody.getError()).isNotEmpty();
     }
 
     private String createURLWithPort(String uri) {
