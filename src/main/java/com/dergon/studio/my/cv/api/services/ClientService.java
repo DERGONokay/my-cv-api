@@ -23,11 +23,11 @@ public class ClientService {
     public ClientResponse save(ClientRequest request) throws InvalidRequestException {
 
         if(!request.isValid()) {
-            throw new InvalidRequestException(new ClientResponse(null, NOT_CREATED, INVALID_REQUEST_BODY));
+            throw new InvalidRequestException(new ClientResponse(request.getEmail(), null, NOT_CREATED, INVALID_REQUEST_BODY));
         }
 
         Client client = new Client(request.getEmail(), Calendar.getInstance());
 
-        return new ClientResponse(repository.save(client), CREATED, null);
+        return new ClientResponse(request.getEmail(), repository.save(client), CREATED, null);
     }
 }

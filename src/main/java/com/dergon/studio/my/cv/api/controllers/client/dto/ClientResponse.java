@@ -18,11 +18,15 @@ public class ClientResponse {
         super();
     }
 
-    public ClientResponse(Client client, boolean created, String error) {
+    public ClientResponse(String email, Client client, boolean created, String error) {
+        this.email = email;
         this.client = client;
         this.created = created;
         this.error = error;
     }
+
+    @ApiModelProperty(value = "The request email")
+    private String email;
 
     @ApiModelProperty(value = "The Client created")
     private Client client;

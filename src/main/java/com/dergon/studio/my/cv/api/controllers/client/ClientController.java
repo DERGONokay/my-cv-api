@@ -45,7 +45,7 @@ public class ClientController {
         } catch (InvalidRequestException e) {
             return new ResponseEntity<>(e.getResponse(), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(new ClientResponse(null, NOT_CREATED, e.toString()), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ClientResponse(request.getEmail(),null, NOT_CREATED, e.toString()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
