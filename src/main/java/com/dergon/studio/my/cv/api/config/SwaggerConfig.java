@@ -1,4 +1,4 @@
-package com.dergon.studio.my.cv.api;
+package com.dergon.studio.my.cv.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
