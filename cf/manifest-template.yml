@@ -1,0 +1,9 @@
+---
+applications:
+  - name: my-cv-api${appHostSuffix}
+    path: ${build.artifactPath}
+    memory: 1G
+    instances: 1
+    env:
+      SPRING_PROFILES_ACTIVE: ${springProfile}
+      _JAVA_OPTIONS: -Dlogging.level.org.springframework.web=${logLevel}

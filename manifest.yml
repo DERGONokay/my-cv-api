@@ -2,5 +2,6 @@
 applications:
   - name: my-cv-api
     memory: 1G
-    random-route: true
     path: target/my.cv.api-0.0.1-SNAPSHOT.jar
+    env:
+      SPRING_PROFILES_ACTIVE: dev

@@ -1,0 +1,7 @@
+{
+  "dev": {
+    "appHostSuffix": "-dev",
+    "logLevel": "DEBUG",
+    "springProfile": "dev"
+  }
+}
