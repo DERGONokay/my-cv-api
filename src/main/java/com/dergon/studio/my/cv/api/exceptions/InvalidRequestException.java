@@ -1,6 +1,6 @@
 package com.dergon.studio.my.cv.api.exceptions;
 
-import com.dergon.studio.my.cv.api.controllers.client.dto.ClientResponse;
+import com.dergon.studio.my.cv.api.controllers.client.dto.CreateClientResponse;
 import lombok.Getter;
 
 /**
@@ -9,9 +9,9 @@ import lombok.Getter;
 @Getter
 public class InvalidRequestException extends Exception {
 
-    private ClientResponse response;
+    private CreateClientResponse response;
 
-    public InvalidRequestException(ClientResponse response) {
+    public InvalidRequestException(CreateClientResponse response) {
         super();
         this.response = response;
     }

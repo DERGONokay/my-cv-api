@@ -1,7 +1,7 @@
 package com.dergon.studio.my.cv.api;
 
-import com.dergon.studio.my.cv.api.controllers.client.dto.ClientRequest;
-import com.dergon.studio.my.cv.api.controllers.client.dto.ClientResponse;
+import com.dergon.studio.my.cv.api.controllers.client.dto.CreateClientRequest;
+import com.dergon.studio.my.cv.api.controllers.client.dto.CreateClientResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,12 +40,12 @@ public class ClientControllerTest {
 
     @Test
     public void should_create_client() {
-        HttpEntity<ClientRequest> request = new HttpEntity<>(new ClientRequest("foo@gmail.com"), headers);
+        HttpEntity<CreateClientRequest> request = new HttpEntity<>(new CreateClientRequest("foo@gmail.com"), headers);
 
 
-        ResponseEntity<ClientResponse> response = restTemplate.postForEntity(createURLWithPort("/api/v1/clients/create"), request, ClientResponse.class, new HashMap<String, String>());
+        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(createURLWithPort("/api/v1/clients/create"), request, CreateClientResponse.class, new HashMap<String, String>());
 
-        ClientResponse responseBody = response.getBody();
+        CreateClientResponse responseBody = response.getBody();
 
         assertThat(responseBody.getClient()).isNotNull();
         assertThat(responseBody.getClient()).isNotEqualTo(null);
@@ -55,11 +55,11 @@ public class ClientControllerTest {
 
     @Test
     public void should_return_bad_request() {
-        HttpEntity<ClientRequest> request = new HttpEntity<>(new ClientRequest("@gmail.com"), headers);
+        HttpEntity<CreateClientRequest> request = new HttpEntity<>(new CreateClientRequest("@gmail.com"), headers);
 
-        ResponseEntity<ClientResponse> response = restTemplate.postForEntity(createURLWithPort("/api/v1/clients/create"), request, ClientResponse.class, new HashMap<>());
+        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(createURLWithPort("/api/v1/clients/create"), request, CreateClientResponse.class, new HashMap<>());
 
-        ClientResponse responseBody = response.getBody();
+        CreateClientResponse responseBody = response.getBody();
 
         assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.BAD_REQUEST);
         assertThat(responseBody.getClient()).isNull();

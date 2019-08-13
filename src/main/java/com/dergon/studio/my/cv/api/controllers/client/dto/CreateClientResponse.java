@@ -12,18 +12,7 @@ import lombok.Setter;
 @ApiModel(value = "Response to client requests")
 @Getter
 @Setter
-public class ClientResponse {
-
-    public ClientResponse() {
-        super();
-    }
-
-    public ClientResponse(String email, Client client, boolean created, String error) {
-        this.email = email;
-        this.client = client;
-        this.created = created;
-        this.error = error;
-    }
+public class CreateClientResponse {
 
     @ApiModelProperty(value = "The request email")
     private String email;
@@ -36,5 +25,16 @@ public class ClientResponse {
 
     @ApiModelProperty(value = "The error that causes that the client can't be created", notes = "Only if created = false")
     private String error;
+
+    public CreateClientResponse() {
+        super();
+    }
+
+    public CreateClientResponse(String email, Client client, boolean created, String error) {
+        this.email = email;
+        this.client = client;
+        this.created = created;
+        this.error = error;
+    }
 
 }

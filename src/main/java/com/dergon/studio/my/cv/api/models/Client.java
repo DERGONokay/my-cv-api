@@ -3,6 +3,9 @@ package com.dergon.studio.my.cv.api.models;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -15,16 +18,7 @@ import java.util.Calendar;
 @ToString
 @Entity
 @Table(name = "USER")
-public class Client {
-
-    public Client() {
-        super();
-    }
-
-    public Client(String email, Calendar downloadTimestamp) {
-        this.email = email;
-        this.downloadTimestamp = downloadTimestamp;
-    }
+public class Client extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +28,10 @@ public class Client {
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @Column(name = "DOWNLOAD_TIMESTAMP")
-    private Calendar downloadTimestamp;
+    @Column(name = "DOWNLOAD_NUMBERS")
+    private int downloadNumbers;
+
+    public void addDownload() {
+        this.downloadNumbers++;
+    }
 }

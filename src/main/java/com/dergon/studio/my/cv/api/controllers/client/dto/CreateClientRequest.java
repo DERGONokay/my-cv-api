@@ -16,13 +16,13 @@ import java.util.regex.Matcher;
 @Setter
 @ToString
 @ApiModel
-public class ClientRequest {
+public class CreateClientRequest {
 
-    public ClientRequest() {
+    public CreateClientRequest() {
         super();
     }
 
-    public ClientRequest(String email) {
+    public CreateClientRequest(String email) {
         this.email = email;
     }
 
