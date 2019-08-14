@@ -17,7 +17,7 @@ public class CreateClientResponse {
     @ApiModelProperty(value = "The request email")
     private String email;
 
-    @ApiModelProperty(value = "The Client created")
+    @ApiModelProperty(value = "The client created")
     private Client client;
 
     @ApiModelProperty(value = "Indicate if the client was successfully created", example = "true")

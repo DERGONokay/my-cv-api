@@ -26,7 +26,7 @@ public class CreateClientRequest {
         this.email = email;
     }
 
-    @ApiModelProperty(value = "Client email", required = true, example = "foo@gmail.com")
+    @ApiModelProperty(value = "client email", required = true, example = "foo@gmail.com")
     private String email;
 
     @JsonIgnore

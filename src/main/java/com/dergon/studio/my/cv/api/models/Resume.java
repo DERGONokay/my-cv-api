@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Blob;
 
 /**
  * @author Damian L. Lisas on 2019-08-13
@@ -26,9 +25,14 @@ public class Resume extends Auditable {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "FILE")
-    private Blob file;
+    @Lob
+    @Column(name = "DATA")
+    private byte[] data;
 
     @Column(name = "VERSION")
     private int version;
+
+    public void increaseVersion() {
+        this.version++;
+    }
 }

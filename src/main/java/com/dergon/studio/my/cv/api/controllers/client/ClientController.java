@@ -4,7 +4,7 @@ import com.dergon.studio.my.cv.api.controllers.client.dto.CreateClientRequest;
 import com.dergon.studio.my.cv.api.controllers.client.dto.CreateClientResponse;
 import com.dergon.studio.my.cv.api.exceptions.InvalidRequestException;
 import com.dergon.studio.my.cv.api.models.Client;
-import com.dergon.studio.my.cv.api.services.ClientService;
+import com.dergon.studio.my.cv.api.services.client.ClientService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -36,9 +36,9 @@ public class ClientController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Delete a Client by ID")
+    @ApiOperation(value = "Delete a client by ID")
     public ResponseEntity delete(
-            @ApiParam(value = "Client ID", required = true) @PathVariable(name = "id") Long id
+            @ApiParam(value = "client ID", required = true) @PathVariable(name = "id") Long id
     ) {
         Client client = clientService.findById(id);
 
@@ -55,7 +55,7 @@ public class ClientController {
             @ApiResponse(code = 500, message = "Unexpected error")
     })
     public ResponseEntity<CreateClientResponse> save(
-            @ApiParam(value = "Client information",required = true) @RequestBody @NotNull CreateClientRequest request
+            @ApiParam(value = "client information",required = true) @RequestBody @NotNull CreateClientRequest request
     ) {
         CreateClientResponse response;
 

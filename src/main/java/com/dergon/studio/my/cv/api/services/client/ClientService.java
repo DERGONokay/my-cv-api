@@ -1,4 +1,4 @@
-package com.dergon.studio.my.cv.api.services;
+package com.dergon.studio.my.cv.api.services.client;
 
 import com.dergon.studio.my.cv.api.controllers.client.dto.ClientConstants;
 import com.dergon.studio.my.cv.api.controllers.client.dto.CreateClientRequest;
