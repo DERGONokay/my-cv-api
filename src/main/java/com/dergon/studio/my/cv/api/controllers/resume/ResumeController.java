@@ -25,6 +25,7 @@ public class ResumeController {
 
     @PostMapping("/save")
     @ApiOperation(value = "Saves the given file in the database, if a file already exists with the same name it gets updated and its version is increased.")
+    @CrossOrigin
     public ResponseEntity<Resume> save(
             @RequestParam("file") MultipartFile file,
             @RequestParam("format") String format
