@@ -2,6 +2,7 @@ package com.dergon.studio.my.cv.api;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -14,4 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @TestPropertySource(value={"classpath:application-local.properties"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ResumeControllerTest {
+
+    @LocalServerPort
+    private int port;
 }

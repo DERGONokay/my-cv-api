@@ -43,7 +43,7 @@ public class ClientControllerTest {
         HttpEntity<CreateClientRequest> request = new HttpEntity<>(new CreateClientRequest("foo@gmail.com"), headers);
 
 
-        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(createURLWithPort("/api/v1/clients/create"), request, CreateClientResponse.class, new HashMap<String, String>());
+        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(TestUtils.createURLWithPort(port, "/api/v1/clients/create"), request, CreateClientResponse.class, new HashMap<String, String>());
 
         CreateClientResponse responseBody = response.getBody();
 
@@ -56,7 +56,7 @@ public class ClientControllerTest {
     public void should_return_bad_request() {
         HttpEntity<CreateClientRequest> request = new HttpEntity<>(new CreateClientRequest("@gmail.com"), headers);
 
-        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(createURLWithPort("/api/v1/clients/create"), request, CreateClientResponse.class, new HashMap<>());
+        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(TestUtils.createURLWithPort( port, "/api/v1/clients/create"), request, CreateClientResponse.class, new HashMap<>());
 
         CreateClientResponse responseBody = response.getBody();
 
@@ -64,9 +64,5 @@ public class ClientControllerTest {
         assertThat(responseBody.getClient()).isNull();
         assertThat(responseBody.isCreated()).isFalse();
         assertThat(responseBody.getError()).isNotEmpty();
-    }
-
-    private String createURLWithPort(String uri) {
-        return "http://localhost:" + port + uri;
     }
 }
