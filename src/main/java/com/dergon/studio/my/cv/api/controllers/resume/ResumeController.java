@@ -58,20 +58,20 @@ public class ResumeController {
             @RequestParam(value = "email") String email
     ) {
         Resume resume = service.findByName(fileName);
-        ByteArrayResource resource = null;
         if(isNull(resume)) {
-            ResponseEntity.notFound();
+            return ResponseEntity.notFound().build();
         }
 
+        ByteArrayResource resource = null;
+        if(resume != null) {
+            resource = new ByteArrayResource(resume.getData());
+        }
 
         try {
             clientService.save(email);
         } catch (InvalidRequestException e) {
-            ResponseEntity.badRequest();
-        }
-
-        if(resume != null) {
-            resource = new ByteArrayResource(resume.getData());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.ok()
