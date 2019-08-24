@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = Application.class)
-@TestPropertySource(value={"classpath:application.properties"})
+@TestPropertySource(value={"classpath:application-local.properties"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ClientControllerTest {
 
