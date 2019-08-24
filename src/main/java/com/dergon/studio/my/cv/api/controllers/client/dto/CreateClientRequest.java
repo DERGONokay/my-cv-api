@@ -28,16 +28,4 @@ public class CreateClientRequest {
 
     @ApiModelProperty(value = "client email", required = true, example = "foo@gmail.com")
     private String email;
-
-    @JsonIgnore
-    public boolean isValid() {
-        if(this.email != null) {
-            Matcher matcher = ClientConstants.VALID_EMAIL_ADDRESS_REGEX.matcher(this.email);
-
-            return matcher.find();
-        }
-        else {
-            return false;
-        }
-    }
 }

@@ -60,7 +60,7 @@ public class ClientController {
         CreateClientResponse response;
 
         try {
-            response = clientService.save(request);
+            response = clientService.save(request.getEmail());
         } catch (InvalidRequestException e) {
             return new ResponseEntity<>(e.getResponse(), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {

@@ -5,6 +5,7 @@ import com.dergon.studio.my.cv.api.controllers.client.dto.CreateClientRequest;
 import com.dergon.studio.my.cv.api.controllers.client.dto.CreateClientResponse;
 import com.dergon.studio.my.cv.api.exceptions.InvalidRequestException;
 import com.dergon.studio.my.cv.api.models.Client;
+import com.dergon.studio.my.cv.api.services.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,19 +26,19 @@ public class ClientService {
         return (List<Client>) repository.findAll();
     }
 
-    public CreateClientResponse save(CreateClientRequest request) throws InvalidRequestException {
+    public CreateClientResponse save(String email) throws InvalidRequestException {
         CreateClientResponse response = new CreateClientResponse();
 
-        response.setEmail(request.getEmail());
+        response.setEmail(email);
 
-        if(!request.isValid()) {
+        if(Utils.isValidEmail(email)) {
             response.setCreated(ClientConstants.NOT_CREATED);
             response.setError(ClientConstants.INVALID_REQUEST_BODY);
 
             throw new InvalidRequestException(response);
         }
 
-        Optional<Client> optional = repository.findByEmail(request.getEmail());
+        Optional<Client> optional = repository.findByEmail(email);
         Client client;
 
         if(optional.isPresent()) {
@@ -47,7 +48,7 @@ public class ClientService {
             response.setCreated(ClientConstants.NOT_CREATED);
         } else {
             client = new Client();
-            client.setEmail(request.getEmail());
+            client.setEmail(email);
             client.setDownloadNumbers(ClientConstants.FIRST_TIME);
 
             response.setCreated(ClientConstants.CREATED);
