@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +19,8 @@ import static java.util.Objects.isNull;
 /**
  * @author Damian L. Lisas on 2019-08-13
  */
-@Controller
+@CrossOrigin(origins = {"https://www.damian-lisas-cv.firebaseapp.com"})
+@RestController
 @RequestMapping("/api/v1/resumes")
 public class ResumeController {
 
@@ -30,14 +30,13 @@ public class ResumeController {
 
     @PostMapping("/save")
     @ApiOperation(value = "Saves the given file in the database, if a file already exists with the same name it gets updated and its version is increased.")
-    @CrossOrigin
     public ResponseEntity<Resume> save(
             @RequestParam("file") MultipartFile file,
             @RequestParam("format") String format
     ) throws IOException {
         Resume resume = service.findByName(file.getOriginalFilename());
 
-        if(resume == null) {
+        if(isNull(resume)) {
             resume = new Resume();
             resume.setFormat(format);
             resume.setData(file.getBytes());
@@ -52,7 +51,6 @@ public class ResumeController {
 
     @GetMapping("/{resumeName}")
     @ApiOperation(value = "Get a resume by its name")
-    @CrossOrigin
     public ResponseEntity get(
             @PathVariable(value = "resumeName") String fileName,
             @RequestParam(value = "email") String email
@@ -62,10 +60,7 @@ public class ResumeController {
             return ResponseEntity.notFound().build();
         }
 
-        ByteArrayResource resource = null;
-        if(resume != null) {
-            resource = new ByteArrayResource(resume.getData());
-        }
+        ByteArrayResource resource = new ByteArrayResource(resume.getData());
 
         try {
             clientService.save(email);

@@ -22,6 +22,7 @@ import static com.dergon.studio.my.cv.api.controllers.client.dto.ClientConstants
 /**
  * @author Damian L. Lisas on 2019-08-02
  */
+@CrossOrigin(origins = {"https://www.damian-lisas-cv.firebaseapp.com"})
 @RestController
 @RequestMapping("/api/v1/clients")
 public class ClientController {
