@@ -31,7 +31,7 @@ public class ClientService {
 
         response.setEmail(email);
 
-        if(Utils.isValidEmail(email)) {
+        if(!Utils.isValidEmail(email)) {
             response.setCreated(ClientConstants.NOT_CREATED);
             response.setError(ClientConstants.INVALID_REQUEST_BODY);
 

@@ -48,7 +48,6 @@ public class ClientControllerTest {
         CreateClientResponse responseBody = response.getBody();
 
         assertThat(responseBody.getClient()).isNotNull();
-        assertThat(responseBody.getClient()).isNotEqualTo(null);
         assertThat(responseBody.isCreated()).isTrue();
         assertThat(responseBody.getError()).isNullOrEmpty();
     }
