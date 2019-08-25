@@ -29,11 +29,13 @@ public class ClientControllerTest {
     @LocalServerPort
     private int port;
 
-    private TestRestTemplate restTemplate = new TestRestTemplate();
+    private TestRestTemplate restTemplate;
     private HttpHeaders headers;
 
     @Before
     public void setUp() {
+        restTemplate = new TestRestTemplate();
+
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
     }
@@ -41,7 +43,6 @@ public class ClientControllerTest {
     @Test
     public void should_create_client() {
         HttpEntity<CreateClientRequest> request = new HttpEntity<>(new CreateClientRequest("foo@gmail.com"), headers);
-
 
         ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(TestUtils.createURLWithPort(port, "/api/v1/clients/create"), request, CreateClientResponse.class, new HashMap<String, String>());
 
