@@ -2,7 +2,6 @@ package com.dergon.studio.my.cv.api.controllers.resume;
 
 import com.dergon.studio.my.cv.api.controllers.resume.dto.SaveResumeRequest;
 import com.dergon.studio.my.cv.api.exceptions.InvalidRequestException;
-import com.dergon.studio.my.cv.api.models.Client;
 import com.dergon.studio.my.cv.api.models.Resume;
 import com.dergon.studio.my.cv.api.services.client.ClientService;
 import com.dergon.studio.my.cv.api.services.resume.ResumeService;
@@ -15,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
 import java.io.IOException;
 
 import static java.util.Objects.isNull;
@@ -24,7 +22,7 @@ import static java.util.Objects.isNull;
  * @author Damian L. Lisas on 2019-08-13
  */
 @Log4j2
-@CrossOrigin(origins = {"https://www.damian-lisas-cv.firebaseapp.com"})
+@CrossOrigin(origins = {"damian-lisas-cv.firebaseapp.com", "https://damian-lisas-cv.firebaseapp.com", "http://damian-lisas-cv.firebaseapp.com"})
 @RestController
 @RequestMapping("/api/v1/resumes")
 public class ResumeController {
