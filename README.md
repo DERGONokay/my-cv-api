@@ -18,4 +18,6 @@ Open a console on the project and execute the following commands:
 
 ## Documentation
 
+PENDING: find the way to create a manifest using cf templates with command `-PcfManifestTarget=dev`
+
 After deploying the application you can access to */swagger-ui.html* to see the end points documentation.
