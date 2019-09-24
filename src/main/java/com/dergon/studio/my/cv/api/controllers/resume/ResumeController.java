@@ -48,6 +48,7 @@ public class ResumeController {
             resume.setVersion(1);
         } else {
             log.info("Resume already exists, increasing version.");
+            resume.setData(body.getFile().getBytes());
             resume.increaseVersion();
         }
 
