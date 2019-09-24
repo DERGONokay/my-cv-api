@@ -48,7 +48,7 @@ public class ClientController {
         return ResponseEntity.accepted().build();
     }
 
-    @PostMapping("/create")
+    @PostMapping
     @ApiOperation(value = "Creates a client with the given information. If the client already exists it updates his downloads number")
     @ApiResponses( value = {
             @ApiResponse(code = 201, message = "Created"),

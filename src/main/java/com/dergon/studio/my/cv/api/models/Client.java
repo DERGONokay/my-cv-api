@@ -17,7 +17,7 @@ import java.util.Calendar;
 @Setter
 @ToString
 @Entity
-@Table(name = "USER")
+@Table(name = "CLIENT")
 public class Client extends Auditable {
 
     @Id

@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = Application.class)
-@TestPropertySource(value={"classpath:application-local.properties"})
+@TestPropertySource(value={"classpath:application.properties"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ClientControllerTest {
 
@@ -44,7 +44,7 @@ public class ClientControllerTest {
     public void should_create_client() {
         HttpEntity<CreateClientRequest> request = new HttpEntity<>(new CreateClientRequest("foo@gmail.com"), headers);
 
-        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(TestUtils.createURLWithPort(port, "/api/v1/clients/create"), request, CreateClientResponse.class, new HashMap<String, String>());
+        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(TestUtils.createURLWithPort(port, "/api/v1/clients"), request, CreateClientResponse.class, new HashMap<String, String>());
 
         CreateClientResponse responseBody = response.getBody();
 
@@ -57,7 +57,7 @@ public class ClientControllerTest {
     public void should_return_bad_request() {
         HttpEntity<CreateClientRequest> request = new HttpEntity<>(new CreateClientRequest("@gmail.com"), headers);
 
-        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(TestUtils.createURLWithPort( port, "/api/v1/clients/create"), request, CreateClientResponse.class, new HashMap<>());
+        ResponseEntity<CreateClientResponse> response = restTemplate.postForEntity(TestUtils.createURLWithPort( port, "/api/v1/clients"), request, CreateClientResponse.class, new HashMap<>());
 
         CreateClientResponse responseBody = response.getBody();
 

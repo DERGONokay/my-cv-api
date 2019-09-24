@@ -42,6 +42,12 @@
 			<version>5.1.6.RELEASE</version>
 		</dependency>
 
+		<!-- POSTGRES -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
 		<!-- H2 - In memory database for local testing -->
 		<dependency>
 			<groupId>com.h2database</groupId>
