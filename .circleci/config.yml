@@ -59,7 +59,7 @@ jobs:
           name: CF Deploy
           command: |
             # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
-            cf push --no-start app-name-dark -f manifest.yml -p target/my-cv-api-0.0.1-SNAPSHOT.jar -n dark -d example.com
+            cf push --no-start app-name-dark -f manifest.yml -p ../target/my-cv-api-0.0.1-SNAPSHOT.jar -n dark -d my-cv-api.com
             # Pass CircleCI variables to Cloud Foundry (optional)
             cf set-env app-name-dark circle_build_num ${CIRCLE_BUILD_NUM}
             cf set-env app-name-dark circle_commit ${CIRCLE_SHA1}
@@ -69,13 +69,13 @@ jobs:
             # Start the application
             cf start app-name-dark
             # Ensure dark route is exclusive to dark app
-            cf unmap-route app-name example.com -n dark || echo "Dark Route Already exclusive"
+            cf unmap-route app-name my-cv-api.com -n dark || echo "Dark Route Already exclusive"
 
       - run:
           name: Re-route live Domain to latest
           command: |
             # Send "real" url to new version
-            cf map-route app-name-dark example.com -n www
+            cf map-route app-name-dark my-cv-api.com -n www
             # Stop sending traffic to previous version
             cf unmap-route my-cv-api my-cv-api.com -n www
             # stop previous version
