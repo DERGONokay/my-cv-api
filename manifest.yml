@@ -3,5 +3,7 @@ applications:
   - name: my-cv-api
     memory: 1G
     path: target/my.cv.api-0.0.1-SNAPSHOT.jar
+    routes:
+      - route: https://my-cv-api-spontaneous-antelope.cfapps.io/
     env:
       SPRING_PROFILES_ACTIVE: dev

@@ -56,7 +56,7 @@ jobs:
           name: CF Deploy
           command: |
             # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
-            cf push --no-start my-cv-api-dark -f manifest.yml -n dark -d my-cv-api-spontaneous-antelope.cfapps.io
+            cf push --no-start my-cv-api-dark -f manifest.yml -n dark
             # Pass CircleCI variables to Cloud Foundry (optional)
             cf set-env my-cv-api-dark circle_build_num ${CIRCLE_BUILD_NUM}
             cf set-env my-cv-api-dark circle_commit ${CIRCLE_SHA1}
