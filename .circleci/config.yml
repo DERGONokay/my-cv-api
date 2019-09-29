@@ -43,7 +43,7 @@ jobs:
           path: target/surefire-reports
 
       - store_artifacts:
-          path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+          path: target/my-cv-api-0.0.1-SNAPSHOT.jar
 
       - run:
           name: Setup CF CLI
@@ -59,7 +59,7 @@ jobs:
           name: CF Deploy
           command: |
             # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
-            cf push --no-start app-name-dark -f manifest.yml -p application.jar -n dark -d example.com
+            cf push --no-start app-name-dark -f manifest.yml -p my-cv-api-0.0.1-SNAPSHOT.jar -n dark -d example.com
             # Pass CircleCI variables to Cloud Foundry (optional)
             cf set-env app-name-dark circle_build_num ${CIRCLE_BUILD_NUM}
             cf set-env app-name-dark circle_commit ${CIRCLE_SHA1}
