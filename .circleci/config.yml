@@ -55,29 +55,4 @@ jobs:
       - run:
           name: CF Deploy
           command: |
-            # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
-            cf push --no-start my-cv-api-dark -f manifest.yml -n dark
-            # Pass CircleCI variables to Cloud Foundry (optional)
-            cf set-env my-cv-api-dark circle_build_num ${CIRCLE_BUILD_NUM}
-            cf set-env my-cv-api-dark circle_commit ${CIRCLE_SHA1}
-            cf set-env my-cv-api-dark circle_workflow_guid ${CIRCLE_WORKFLOW_ID}
-            cf set-env my-cv-api-dark circle_user ${CIRCLE_PROJECT_USERNAME}
-            cf set-env my-cv-api-dark circle_repo ${CIRCLE_PROJECT_REPONAME}
-            # Start the application
-            cf start my-cv-api-dark
-            # Ensure dark route is exclusive to dark app
-            cf unmap-route my-cv-api my-cv-api-spontaneous-antelope.cfapps.io -n dark || echo "Dark Route Already exclusive"
-
-      - run:
-          name: Re-route live Domain to latest
-          command: |
-            # Send "real" url to new version
-            cf map-route my-cv-api-dark my-cv-api-spontaneous-antelope.cfapps.io -n www
-            # Stop sending traffic to previous version
-            cf unmap-route my-cv-api my-cv-api-spontaneous-antelope.cfapps.io -n www
-            # stop previous version
-            cf stop my-cv-api
-            # delete previous version
-            cf delete my-cv-api -f
-            # Switch name of "dark" version to claim correct name
-            cf rename my-cv-api-dark my-cv-api
+            cf push -f manifest.yml
