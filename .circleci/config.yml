@@ -59,23 +59,23 @@ jobs:
           name: CF Deploy
           command: |
             # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
-            cf push --no-start app-name-dark -f manifest.yml -p ../target/my-cv-api-0.0.1-SNAPSHOT.jar -n dark -d my-cv-api.com
+            cf push --no-start my-cv-api-dark -f manifest.yml -p my-cv-api-0.0.1-SNAPSHOT.jar -n dark -d my-cv-api.com
             # Pass CircleCI variables to Cloud Foundry (optional)
-            cf set-env app-name-dark circle_build_num ${CIRCLE_BUILD_NUM}
-            cf set-env app-name-dark circle_commit ${CIRCLE_SHA1}
-            cf set-env app-name-dark circle_workflow_guid ${CIRCLE_WORKFLOW_ID}
-            cf set-env app-name-dark circle_user ${CIRCLE_PROJECT_USERNAME}
-            cf set-env app-name-dark circle_repo ${CIRCLE_PROJECT_REPONAME}
+            cf set-env my-cv-api-dark circle_build_num ${CIRCLE_BUILD_NUM}
+            cf set-env my-cv-api-dark circle_commit ${CIRCLE_SHA1}
+            cf set-env my-cv-api-dark circle_workflow_guid ${CIRCLE_WORKFLOW_ID}
+            cf set-env my-cv-api-dark circle_user ${CIRCLE_PROJECT_USERNAME}
+            cf set-env my-cv-api-dark circle_repo ${CIRCLE_PROJECT_REPONAME}
             # Start the application
-            cf start app-name-dark
+            cf start my-cv-api-dark
             # Ensure dark route is exclusive to dark app
-            cf unmap-route app-name my-cv-api.com -n dark || echo "Dark Route Already exclusive"
+            cf unmap-route my-cv-api my-cv-api.com -n dark || echo "Dark Route Already exclusive"
 
       - run:
           name: Re-route live Domain to latest
           command: |
             # Send "real" url to new version
-            cf map-route app-name-dark my-cv-api.com -n www
+            cf map-route my-cv-api-dark my-cv-api.com -n www
             # Stop sending traffic to previous version
             cf unmap-route my-cv-api my-cv-api.com -n www
             # stop previous version
@@ -83,4 +83,4 @@ jobs:
             # delete previous version
             cf delete my-cv-api -f
             # Switch name of "dark" version to claim correct name
-            cf rename app-name-dark my-cv-api
+            cf rename my-cv-api-dark my-cv-api

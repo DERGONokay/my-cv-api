@@ -1,4 +1,4 @@
-# My CV API
+# My CV API [![CircleCI](https://circleci.com/gh/DamianLisas/my-cv-api.svg?style=svg)](https://circleci.com/gh/DamianLisas/my-cv-api)
 
 ## Requirements
 
